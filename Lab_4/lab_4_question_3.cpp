@@ -2,7 +2,7 @@
 #include<string>
 using namespace std;
 
-class StackLL {
+class StackLL {					//creates a stack
 	class Node {
 		public:
 			char data;
@@ -13,12 +13,12 @@ class StackLL {
 	int size;
 
 	public:
-		StackLL() {
+		StackLL() {			//constructor
 			top = NULL;
 			size = 0;
 		}
-
-		void push(char d);
+	
+		void push(char d);		//pushes an element
 		void pop();
 		char get(int i);
 		bool isPalindrome();
@@ -217,7 +217,7 @@ void QueueLL::display() {
 }
 
 int main() {
-	QueueLL issueList;
+	QueueLL issueList;			//creates issueList as a Queue
 	string dummyName = "aaaaaa";
 	for (int i=0; i<12; ++i) {
 		string foo = dummyName;
@@ -233,4 +233,6 @@ int main() {
 	issueList.queue("WooW", "0000", "I am not very imaginative");
 
 	issueList.display();
+	return 0;
+}
 
