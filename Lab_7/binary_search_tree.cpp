@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-class node{
+class node{				//creates a node
 public:
 	int data;
 	node* left = NULL;
@@ -9,7 +9,7 @@ public:
 	node* parent = NULL;
 };
 
-class bTree{
+class bTree{			//class binary tree
 public:
 	node* root;
 
@@ -17,13 +17,13 @@ public:
 		root = NULL;
 	}
 
-	void insert(node* p, node* temp){
+	void insert(node* p, node* temp){	//inserts an element in the bst
 		
 		int x = temp->data;
 		temp->data = x;
 		temp->parent = temp->right = temp->left = NULL;
 
-		if (root==NULL){
+		if (root==NULL){		//if nothing exists
 			root = temp;
 		}
 		
@@ -60,7 +60,7 @@ public:
 		}
 	}
 
-	void display(node* temp){
+	void display(node* temp){		//displays the elements
 			if(temp->left != NULL){
 				return;
 			}
