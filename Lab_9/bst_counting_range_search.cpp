@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-class node{
+class node{				//creates a node
 public:
 	int data;
 	node* left = NULL;
@@ -9,7 +9,7 @@ public:
 	node* parent = NULL;
 };
 
-class bTree {
+class bTree {				//creates a binary tree
 public:
 	node* root;
 
@@ -59,7 +59,7 @@ public:
 		}
 	}
 
-	void display(node* temp){
+	void display(node* temp){		//displays the elements
 			if(temp == NULL){
 				return;
 			}
