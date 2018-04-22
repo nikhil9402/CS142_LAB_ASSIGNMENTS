@@ -3,16 +3,16 @@ using namespace std;
 
 
 int length = 0;
-int heap[100];
+int heap[100];				//declares a heap
 
-void insert(int key){
+void insert(int key){			//inserts an element
 	heap[length] = key;
 	int i=length;
 	int p=(i-1)/2;
 
-	while(heap[i]>=heap[p] && i!=0){
+	while(heap[i]>=heap[p] && i!=0){	//a loop to swap the elements if it violates heap property
 
-		int a = heap[p];
+		int a = heap[p];		//swaps the elements if heap[i] > heap[p]
 		int b = heap[i];
 		heap[p] = b;
 		heap[i] = a;
@@ -34,11 +34,12 @@ void delete_root(){
 	heap[length-1] = a;
 
 	length--;			//decreases the loop length by 1.
+	
+	int current_node = 0;
+	int i = current_node;
 
-	int current_node = 0;	
-
-	while(heap[current_node] < (heap[(2*i)+1] || heap[(2*i)+2])){ //no children
-		if(2*current_node+1 > length-1){
+	while(heap[current_node] < (heap[(2*i)+1] || heap[(2*i)+2])){ 
+		if(2*current_node+1 > length-1){		//no children
 			break;
 		}
 
