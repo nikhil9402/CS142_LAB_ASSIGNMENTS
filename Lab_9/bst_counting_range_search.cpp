@@ -17,18 +17,18 @@ public:
 		root = NULL;
 	}
 
-	void insert(node* p, node* temp){
-		
+	void insert(node* p, node* temp){	//inserts node in a bst
+						//p is 
 		int x = temp->data;
 
-		if (root==NULL){
+		if (root==NULL){		//if nothing exists
 			root = temp;
 		}
 		
-		else{
+		else{				
 			
 	
-				if(x < p->data){
+				if(x < p->data){	//if key is to be inserted in the left subtree
 					if(p->left==NULL)
 					{
 						p->left = temp;
@@ -42,7 +42,7 @@ public:
 					
 				}
 
-				else if (x > p->data){
+				else if (x > p->data){ //if key is to be inserted in the right subtree
 					if(p->right==NULL){
 						p->right = temp;
 						temp->parent = p;
@@ -66,37 +66,37 @@ public:
 
 			else{
 				
-				display(temp->left);
-				cout << temp->data << endl;
-				display(temp->right);
+				display(temp->left);		//go to left 
+				cout << temp->data << endl;	//print the data
+				display(temp->right);		//move to right
 
 				
 			
 			}			
 	}
 
-	node* search(node* temp, int key){
-		if (temp == NULL) {
+	node* search(node* temp, int key){		//search key
+		if (temp == NULL) {			//if key is not in the bst
 			cout << "key not found" << endl << endl;
 			return temp;
 		} 
 
-		if (temp->data == key) {
-			cout << "key found" << endl;
-			return temp;
+		if (temp->data == key) {		//if key is found
+			cout << "key found" << endl;	//print key found
+			return temp;			//and return
 		}
 
-		else if (temp->data > key) {
+		else if (temp->data > key) {		//search key in left subtree
 			search(temp->left, key);
 		} 
 
-		else {
+		else {					//search key in right subtree
 			search(temp->right, key);
 		}
 		
 	} 
 
-	node* minValue(node* temp)
+	node* minValue(node* temp)  			//gives minimum value in the 
 	{
 		while (temp->left != NULL)
 		{
@@ -105,14 +105,14 @@ public:
 		return temp;
 	}
 
-	void deleteNode(node* temp, int key)
+	void deleteNode(node* temp, int key)		//deletes a node
 	{
 		node* p = search(temp,key);
 
 
-		if (p!=NULL){
+		if (p!=NULL){				
 
-			if(p->left == NULL && p->right == NULL)
+			if(p->left == NULL && p->right == NULL)	//no child
 			{
 				
 				if(p->parent->left == p){
@@ -126,7 +126,7 @@ public:
 				return;
 			}
 
-			else if(p->left == NULL || p->right == NULL)
+			else if(p->left == NULL || p->right == NULL) 	//1 child
 			{
 				if(p->left == NULL){
 					p->right->parent = p->parent;
@@ -153,7 +153,7 @@ public:
 				}
 			}
 
-			else if(p->left != NULL && p->right != NULL){
+			else if(p->left != NULL && p->right != NULL){ //2 child
 				node* c = p->left;
 
 				while(c->right != NULL)
@@ -172,18 +172,48 @@ public:
 					p->data = c->data;
 				}
 		    }
-		else {
+		else {						//if key not found
 			cout << "key not found" << endl;
 			return;
 		}
 	}
-}
+	}
+	
+	int n=0;
+
+	int count(node* temp){				//counts the no. of nodes in the bst
+		if(temp == NULL){			//base case
+			return 0;
+		}
+		else{
+			count(temp->left);		//go to left 
+			n++;				//increase value of n 
+			count(temp->right);		//go to right
+		}
+		return n;
+	}
+
+	void range_search(int k1,int k2,node* temp){
+		
+		if(temp==NULL){				//base case
+			return;
+		}
+		if(temp->data > k1){			//if we are right to k1
+			range_search(k1,k2,temp->left);	//go with left subtree
+		}
+		if(temp->data >= k1 && temp->data <= k2){//if we are in the range
+			cout << temp->data << endl;	//prints the element
+		}
+		if(temp->data < k2 ){			//if we are left to k2
+			range_search(k1,k2,temp->right);//go with right subtree
+		}
+	}
 
 };
 
 int main(){
 	bTree b1;
-	for (int i=0; i<20; i=i+2) {
+	for (int i=0; i<20; i=i+2) {		//inserts nodes using loop
 		node* temp = new node;
 		temp->data = i;
 		b1.insert(b1.root, temp);
@@ -204,17 +234,19 @@ int main(){
 	
 	node* p = b1.root;
 	
-	b1.display(b1.root);
+	b1.display(b1.root);		//displays the bst
 
-	b1.search(b1.root,9);
+	b1.search(b1.root,9);		//search the location of '9' in the bst
 
 	b1.display(b1.root);
-	b1.deleteNode(b1.root,19);
+	b1.deleteNode(b1.root,19);	//deletes a leaf node
 	b1.display(b1.root);
-	b1.deleteNode(b1.root,16);
+	b1.deleteNode(b1.root,16);	//deletes an internal node having 1 child
 	b1.display(b1.root);
-	b1.deleteNode(b1.root,0);
+	b1.deleteNode(b1.root,0);	//deletes an internal node having 2 child
 	b1.display(b1.root);
+	cout << endl << "No. of nodes = " << b1.count(b1.root) << endl;	//counts the no. of nodes
+	b1.range_search(-9,-4,b1.root);		// prints elements between -9 and -4
 
 	return 0;
 }
