@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-class node{
+class node{			//creates a node
 public:
 	int data;
 	node* left = NULL;
@@ -9,7 +9,7 @@ public:
 	node* parent = NULL;
 };
 
-class bTree{
+class bTree{			//creates a binary tree			
 public:
 	node* root;
 
@@ -17,23 +17,22 @@ public:
 		root = NULL;
 	}
 
-	void insert(node* p, node* temp){
-		
+	void insert(node* p, node* temp){       //inserts node in a bst
+						//p is a pointer which will move
 		int x = temp->data;
 
 		
-
-		if (root==NULL){
+		if (root==NULL){		//if nothing exists
 			root = temp;
 		}
 		
 		else{
 			
-				if(x == p->data){
+				if(x == p->data){	
 					cout << "Element already exists" << endl;
 				}
 	
-				if(x < p->data){
+				if(x < p->data){		//if key is to be inserted in the left subtree
 					if(p->left==NULL)
 					{
 							p->left = temp;
@@ -45,7 +44,7 @@ public:
 					
 				}
 
-				else{
+				else{				//if key is to be inserted in the right subtree
 					if(p->right==NULL){
 						p->right = temp;
 					}
@@ -60,44 +59,44 @@ public:
 		}
 	}
 
-	void display(node* temp){
+	void display(node* temp){		//displays the elements
 			if(temp == NULL){
 				return;
 			}
 
 			else{
 				
-				display(temp->left);
-				cout << temp->data << endl;
-				display(temp->right);
+				display(temp->left);		//go to left
+				cout << temp->data << endl;	//print
+				display(temp->right);		//go to right
 
 				
 			
 			}			
 	}
 
-	bool search(node* temp, int key){
-		if (temp == NULL) {
-			cout << "key not found" << endl;
+	bool search(node* temp, int key){			//search key
+		if (temp == NULL) {				//if key is not found
+			cout << "key not found" << endl;	
 			return false;
 		} 
 
-		if (temp->data == key) {
+		if (temp->data == key) {			//if key is found
 			cout << "key found" << endl;
 			return true;
 		}
 
-		else if (temp->data < key) {
+		else if (temp->data < key) {			//search in right subtree
 			search(temp->right, key);
 		} 
-
-		else {
+		
+		else {						//search in left subtree
 			search(temp->left, key);
 		}
 		
 	} 
 
-	node* minValue(node* temp)
+	node* minValue(node* temp)			//gives minimum value
 	{
 		while (temp->left != NULL)
 		{
@@ -106,21 +105,21 @@ public:
 		return temp;
 	}
 
-	void deleteNode(node* temp, int key)
+	void deleteNode(node* temp, int key)		//deletes a node
 	{
-		bool d = search(temp,key);
+		bool d = search(temp,key);		//call search function to check whether it exist or not
 
 		if (d==true){
 			
 
-			if(temp->left == NULL && temp->right == NULL)
+			if(temp->left == NULL && temp->right == NULL)	//if it has no child
 			{
 				cout << "Hello";
 				delete temp;
 				return;
 			}
 
-			else if(temp->left == NULL || temp->right == NULL)
+			else if(temp->left == NULL || temp->right == NULL)	//if it has 1 child
 			{
 				if(temp->left == NULL){
 					temp->data = temp->right->data;
@@ -133,6 +132,8 @@ public:
 					delete temp->left;
 				}
 			}
+			
+			
 
 
 		}
